@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>先延ばしタイプ診断｜Grow With 思考と行動の調律アカデミー</title>
+<meta name="description" content="あなたの先延ばしには、理由がある。7つのパターンから自分の傾向と調律ポイントを知る、約3分の無料セルフチェック。">
+<meta property="og:title" content="先延ばしタイプ診断｜思考と行動の調律アカデミー">
+<meta property="og:description" content="あなたの先延ばしには、理由がある。7つのパターンから自分の傾向を知る約3分の無料セルフチェック。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #221f1a;          /* 温かみのある墨 */
+    --ink-soft: #4c463d;
+    --paper: #f7f1e6;        /* クリーム地 */
+    --paper-deep: #efe6d5;
+    --orange: #E8761A;
+    --orange-deep: #C95E08;
+    --orange-pale: #fbe9d8;
+    --green: #3d8a5e;
+    --green-pale: #e9f3ec;
+    --blue: #40608a;
+    --blue-pale: #e9eef6;
+    --font-display: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
+    --font-num: "Anton", "Zen Kaku Gothic New", sans-serif;
+    --font-body: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: var(--ink);
+    background:
+      radial-gradient(1200px 500px at 85% -5%, rgba(232,118,26,.10), transparent 60%),
+      var(--paper);
+    line-height: 1.9;
+    line-break: strict;
+    word-break: normal;
+    overflow-wrap: break-word;
+    overflow-x: hidden;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 22px; }
+
+  /* ============ ヒーロー（雑誌表紙・非対称） ============ */
+  .hero {
+    position: relative;
+    padding: 34px 0 90px;
+    overflow: hidden;
+  }
+  .hero-big-num {
+    position: absolute;
+    top: -30px;
+    right: -12px;
+    font-family: var(--font-num);
+    font-size: clamp(160px, 34vw, 320px);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(232,118,26,.35);
+    letter-spacing: -.02em;
+    user-select: none;
+    pointer-events: none;
+  }
+  .hero-brand {
+    font-size: 11.5px;
+    letter-spacing: .3em;
+    font-weight: 700;
+    color: var(--ink-soft);
+    border-left: 4px solid var(--orange);
+    padding-left: 10px;
+    margin-bottom: 46px;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(46px, 11vw, 92px);
+    line-height: 1.12;
+    letter-spacing: .02em;
+    position: relative;
+  }
+  .hero h1 .marker {
+    background: linear-gradient(transparent 62%, var(--orange) 62%, var(--orange) 94%, transparent 94%);
+  }
+  .hero-copy {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(17px, 3.4vw, 24px);
+    margin-top: 26px;
+    color: var(--ink);
+  }
+  .hero-copy em { font-style: normal; color: var(--orange-deep); }
+  .hero-lead {
+    max-width: 560px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-top: 14px;
+  }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .hero-tag {
+    background: var(--ink);
+    color: #f5efe4;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    padding: 7px 16px;
+  }
+  .hero-tag.tag-orange { background: var(--orange); color: #fff; }
+  /* 入場アニメ（stagger） */
+  .rise { opacity: 0; transform: translateY(26px); animation: rise .55s cubic-bezier(.2,.7,.2,1) forwards; }
+  .rise.d1 { animation-delay: .05s; }
+  .rise.d2 { animation-delay: .16s; }
+  .rise.d3 { animation-delay: .27s; }
+  .rise.d4 { animation-delay: .38s; }
+  .rise.d5 { animation-delay: .49s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  /* 斜めの帯（ヒーロー下端） */
+  .slash-band {
+    height: 86px;
+    background: var(--orange);
+    clip-path: polygon(0 55%, 100% 0, 100% 45%, 0 100%);
+    margin-top: -56px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ============ セクション共通 ============ */
+  section { padding: 58px 0 8px; }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 26px; }
+  .sec-head .en {
+    font-family: var(--font-num);
+    font-size: 15px;
+    letter-spacing: .18em;
+    color: var(--orange-deep);
+  }
+  .sec-head h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(24px, 5vw, 34px);
+    letter-spacing: .02em;
+  }
+  .lead { color: var(--ink-soft); font-size: 14.5px; max-width: 620px; }
+
+  /* 7タイプ・番号リスト（非対称2カラム） */
+  .type-list { margin: 30px 0 8px; display: grid; gap: 0; }
+  @media (min-width: 680px) { .type-list { grid-template-columns: 1fr 1fr; column-gap: 46px; } }
+  .type-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 13px 4px;
+    border-bottom: 1px solid rgba(34,31,26,.16);
+  }
+  .type-row .num {
+    font-family: var(--font-num);
+    font-size: 30px;
+    line-height: 1;
+    color: var(--orange);
+    width: 46px;
+    flex: none;
+  }
+  .type-row .t-name { font-weight: 700; font-size: 16.5px; letter-spacing: .03em; }
+  .type-row .t-catch { font-size: 12px; color: var(--ink-soft); margin-left: auto; text-align: right; }
+  @media (max-width: 480px) { .type-row .t-catch { display: none; } }
+
+  .slash-list { list-style: none; margin: 26px 0 6px; }
+  .slash-list li {
+    font-size: 15px;
+    font-weight: 700;
+    padding: 9px 0 9px 34px;
+    position: relative;
+  }
+  .slash-list li::before {
+    content: "";
+    position: absolute;
+    left: 6px; top: 12px;
+    width: 4px; height: 24px;
+    background: var(--orange);
+    transform: skewX(-18deg);
+  }
+
+  /* ボタン（シャープ矩形・斜めスライドhover） */
+  .btn {
+    display: inline-block;
+    position: relative;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    padding: 18px 46px;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: .12em;
+    cursor: pointer;
+    overflow: hidden;
+    text-decoration: none;
+    text-align: center;
+    transition: color .25s;
+  }
+  .btn span { position: relative; z-index: 1; }
+  .btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--orange);
+    transform: translateX(-135%) skewX(-12deg) scaleX(1.2);
+    transition: transform .3s cubic-bezier(.2,.7,.2,1);
+  }
+  .btn:hover::before, .btn:focus-visible::before { transform: translateX(0) skewX(0) scaleX(1.2); }
+  .btn:disabled { opacity: .4; cursor: not-allowed; }
+  .btn:disabled::before { display: none; }
+  .btn-outline { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
+  .btn-outline:hover, .btn-outline:focus-visible { color: #fff; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; align-items: center; }
+  .link-btn {
+    background: none; border: none;
+    color: var(--ink-soft);
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    padding: 6px;
+  }
+  .link-btn:hover { color: var(--orange-deep); }
+  .note { font-size: 11.5px; color: #8a8272; margin-top: 20px; }
+
+  /* ============ 設問 ============ */
+  .quiz-stage {
+    position: relative;
+    padding: 40px 0 70px;
+    min-height: 620px;
+  }
+  .q-bg-num {
+    position: absolute;
+    top: -8px; right: -10px;
+    font-family: var(--font-num);
+    font-size: clamp(130px, 26vw, 230px);
+    line-height: 1;
+    color: rgba(232,118,26,.12);
+    user-select: none;
+    pointer-events: none;
+    transition: opacity .3s;
+  }
+  .progress-wrap { margin-bottom: 40px; max-width: 640px; }
+  .progress-meta {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .progress-meta .p-count { font-family: var(--font-num); font-size: 22px; letter-spacing: .06em; color: var(--ink); }
+  .progress-meta .p-count small { font-size: 13px; color: var(--ink-soft); }
+  .progress-meta .p-label { font-size: 11px; letter-spacing: .2em; font-weight: 700; color: var(--ink-soft); }
+  .progress-bar { height: 4px; background: rgba(34,31,26,.14); overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--orange); transition: width .4s cubic-bezier(.2,.7,.2,1); }
+
+  .q-block.swap { animation: qswap .34s cubic-bezier(.2,.7,.2,1); }
+  @keyframes qswap {
+    from { opacity: 0; transform: translateX(26px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .q-text {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(20px, 4.4vw, 28px);
+    line-height: 1.6;
+    max-width: 660px;
+    min-height: 3.4em;
+    margin-bottom: 30px;
+  }
+  .likert-btns { display: grid; gap: 10px; max-width: 560px; }
+  .likert-btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    background: rgba(255,255,255,.55);
+    border: 1px solid rgba(34,31,26,.25);
+    border-left: 5px solid rgba(34,31,26,.25);
+    padding: 14px 18px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: inherit;
+    color: var(--ink);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color .15s, background .15s, transform .15s, color .15s;
+  }
+  .likert-btn:hover { border-left-color: var(--orange); background: #fff; transform: translateX(4px); }
+  .likert-btn.selected {
+    background: var(--ink);
+    color: #f5efe4;
+    border-color: var(--ink);
+    border-left-color: var(--orange);
+  }
+  .likert-btn .key {
+    flex: none;
+    font-family: var(--font-num);
+    font-size: 19px;
+    color: var(--orange-deep);
+    width: 20px;
+    text-align: center;
+  }
+  .likert-btn.selected .key { color: var(--orange); }
+  .quiz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; max-width: 560px; }
+  .kbd-hint { font-size: 11px; color: #a89f8d; }
+
+  /* ============ 結果 ============ */
+  .result-hero { position: relative; padding: 46px 0 10px; }
+  .result-eyebrow {
+    font-family: var(--font-num);
+    font-size: 15px;
+    letter-spacing: .24em;
+    color: var(--orange-deep);
+    margin-bottom: 4px;
+  }
+  .result-heading { font-size: 14px; font-weight: 700; color: var(--ink-soft); margin-bottom: 10px; }
+  .result-type-name {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(38px, 9vw, 72px);
+    line-height: 1.2;
+    letter-spacing: .02em;
+  }
+  .result-type-name .marker {
+    background: linear-gradient(transparent 62%, var(--orange) 62%, var(--orange) 94%, transparent 94%);
+  }
+  .result-catch {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(15px, 3vw, 19px);
+    color: var(--ink-soft);
+    margin-top: 8px;
+  }
+  .hybrid-note {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--blue-pale);
+    color: var(--blue);
+    padding: 5px 14px;
+    margin-top: 12px;
+  }
+
+  .chart-grid { display: grid; gap: 30px; margin-top: 34px; align-items: center; }
+  @media (min-width: 720px) { .chart-grid { grid-template-columns: 5fr 4fr; } }
+  .radar-box svg { max-width: 420px; width: 100%; height: auto; display: block; margin: 0 auto; }
+  .radar-data { transform-origin: 205px 210px; animation: radarGrow .8s cubic-bezier(.2,.7,.2,1) both .15s; }
+  @keyframes radarGrow { from { transform: scale(.05); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .score-rows { }
+  .score-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .score-row .sr-name { flex: none; width: 7.2em; font-size: 13px; font-weight: 700; }
+  .score-row .sr-bar { flex: 1; height: 14px; background: rgba(34,31,26,.1); overflow: hidden; }
+  .score-row .sr-fill {
+    height: 100%;
+    background: repeating-linear-gradient(-45deg, var(--orange), var(--orange) 6px, #f0913f 6px, #f0913f 12px);
+    width: 0;
+    transition: width .8s cubic-bezier(.2,.7,.2,1);
+  }
+  .score-row.primary .sr-fill { background: var(--orange-deep); }
+  .score-row .sr-val { flex: none; width: 2.2em; font-family: var(--font-num); font-size: 15px; text-align: right; color: var(--ink-soft); }
+
+  .desc-block { margin-top: 54px; }
+  .desc-block h3 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(20px, 4vw, 26px);
+    margin-bottom: 14px;
+    border-left: 6px solid var(--orange);
+    padding-left: 14px;
+  }
+  .desc-block > p { font-size: 15px; max-width: 680px; }
+  .trait-cards { display: grid; gap: 16px; margin-top: 26px; }
+  @media (min-width: 640px) { .trait-cards { grid-template-columns: 1fr 1fr; } }
+  .trait-card { padding: 20px 20px 18px; font-size: 14px; }
+  .trait-card h4 { font-size: 13px; letter-spacing: .1em; margin-bottom: 8px; font-weight: 900; }
+  .trait-card.strength { background: var(--green-pale); border-left: 5px solid var(--green); }
+  .trait-card.strength h4 { color: var(--green); }
+  .trait-card.pitfall { background: var(--orange-pale); border-left: 5px solid var(--orange); }
+  .trait-card.pitfall h4 { color: var(--orange-deep); }
+  .hint-card {
+    background: var(--blue-pale);
+    border-left: 5px solid var(--blue);
+    padding: 20px 22px;
+    font-size: 14px;
+    margin-top: 16px;
+  }
+  .hint-card h4 { font-size: 13px; letter-spacing: .1em; color: var(--blue); margin-bottom: 8px; font-weight: 900; }
+
+  /* ============ メールフォーム（ink帯） ============ */
+  .mail-band {
+    background: var(--ink);
+    color: #f0e9db;
+    margin-top: 64px;
+    padding: 54px 0 58px;
+    clip-path: polygon(0 26px, 100% 0, 100% 100%, 0 100%);
+  }
+  .mail-band .sec-head .en { color: var(--orange); }
+  .mail-band .sec-head h2 { color: #f7f1e6; }
+  .mail-band .lead { color: rgba(240,233,219,.75); }
+  .mail-band .slash-list li { color: #f0e9db; }
+  .form-grid { display: grid; gap: 18px; margin-top: 28px; max-width: 560px; }
+  .form-field label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; color: #f0e9db; }
+  .form-field .opt { font-weight: 500; color: rgba(240,233,219,.55); font-size: 11.5px; }
+  .form-field input[type=text], .form-field input[type=email], .form-field select {
+    width: 100%;
+    border: 1px solid rgba(247,241,230,.35);
+    background: rgba(247,241,230,.06);
+    padding: 13px 15px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #f7f1e6;
+  }
+  .form-field select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, #f7f1e6 50%), linear-gradient(135deg, #f7f1e6 50%, transparent 50%); background-position: calc(100% - 20px) 55%, calc(100% - 15px) 55%; background-size: 5px 5px; background-repeat: no-repeat; }
+  .form-field select option { color: var(--ink); background: #fff; }
+  .form-field input::placeholder { color: rgba(240,233,219,.4); }
+  .form-field input:focus, .form-field select:focus { outline: 2px solid var(--orange); border-color: var(--orange); }
+  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; color: rgba(240,233,219,.8); }
+  .consent input { margin-top: 5px; accent-color: var(--orange); }
+  .consent a { color: var(--orange); }
+  .form-error { color: #ff9d7a; font-size: 13px; display: none; font-weight: 700; }
+  .hp-field { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
+
+  /* 完了パネル */
+  .done-band { margin-top: 64px; padding: 10px 0 20px; }
+  .done-band .sec-head .en { color: var(--green); }
+  .done-band p { font-size: 15px; max-width: 640px; }
+
+  footer {
+    margin-top: 80px;
+    background: var(--ink);
+    color: rgba(240,233,219,.6);
+    font-size: 11px;
+    padding: 34px 0 42px;
+  }
+  footer .disclaimer { max-width: 680px; margin-bottom: 14px; line-height: 1.9; }
+  footer .brandline { font-family: var(--font-num); letter-spacing: .18em; font-size: 13px; color: rgba(240,233,219,.85); }
+  .hidden { display: none !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rise, .q-block.swap, .radar-data { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .sr-fill, .progress-fill, .btn::before { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ ヒーロー ============ -->
+<header class="hero">
+  <div class="hero-big-num" aria-hidden="true">21</div>
+  <div class="wrap">
+    <div class="hero-brand rise d1">GROW WITH — 思考と行動の調律アカデミー</div>
+    <h1 class="rise d2"><span class="marker">先延ばし</span><br>タイプ診断</h1>
+    <p class="hero-copy rise d3">あなたの「先延ばし」には、<em>理由</em>がある。</p>
+    <p class="hero-lead rise d4">先延ばしは意志の弱さではなく、思考と行動のあいだにある「ズレ」のサインです。21の質問で、あなたの先延ばしパターンと調律ポイントを見つけましょう。</p>
+    <div class="hero-tags rise d5">
+      <span class="hero-tag tag-orange">全21問・約3分</span>
+      <span class="hero-tag">無料</span>
+      <span class="hero-tag">登録なしで結果表示</span>
+    </div>
+  </div>
+</header>
+<div class="slash-band" aria-hidden="true"></div>
+
+<!-- ============ ランディング ============ -->
+<div id="viewLanding">
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">ABOUT</span>
+        <h2>7つの先延ばしパターン</h2>
+      </div>
+      <p class="lead">先延ばしの起こり方は、人によって違います。この診断では、あなたの中で最も強いパターンと、7つの傾向のバランスをレーダーチャートで可視化します。</p>
+      <div class="type-list" id="typeChips"></div>
+      <ul class="slash-list">
+        <li>気が重い仕事を、つい後回しにしてしまう</li>
+        <li>締切前にならないとエンジンがかからない</li>
+        <li>完璧を求めて、なかなか出せない・始められない</li>
+      </ul>
+      <p class="lead">ひとつでも心当たりがあれば、パターンを知ることが調律の第一歩です。</p>
+      <div class="btn-row">
+        <button class="btn" id="btnStart"><span>診断をはじめる</span></button>
+        <button class="link-btn hidden" id="btnLastResult">前回の結果を見る</button>
+      </div>
+      <p class="note">※ 本診断は自己理解のためのセルフチェックツールであり、医学的・心理学的な診断を行うものではありません。</p>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 設問 ============ -->
+<div id="viewQuiz" class="hidden">
+  <section class="quiz-stage">
+    <div class="q-bg-num" id="qBgNum" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span class="p-count" id="progressLabel"></span>
+          <span class="p-label">SAKINOBASHI CHECK</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      </div>
+      <div class="q-block" id="qBlock">
+        <div class="q-text" id="qText"></div>
+        <div class="likert-btns" id="likertBtns"></div>
+      </div>
+      <div class="quiz-nav">
+        <button class="link-btn" id="btnBack">← 前の質問へ</button>
+        <span class="kbd-hint">キーボード 1〜5 でも回答できます</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 結果 ============ -->
+<div id="viewResult" class="hidden">
+  <section class="result-hero">
+    <div class="wrap">
+      <div class="result-eyebrow">RESULT</div>
+      <div class="result-heading" id="resultHeading">あなたの最も強いパターン</div>
+      <div class="result-type-name" id="resultTypeName"></div>
+      <div class="result-catch" id="resultCatch"></div>
+      <div id="hybridNote"></div>
+      <div class="chart-grid">
+        <div class="radar-box" id="radarBox"></div>
+        <div class="score-rows" id="scoreRows"></div>
+      </div>
+      <p class="note">スコアは回答の自己申告に基づく相対的な傾向です。状況や時期によって変わります。</p>
+
+      <div class="desc-block">
+        <h3 id="descHeading">このパターンの特徴</h3>
+        <p id="resultSummary"></p>
+        <div class="trait-cards">
+          <div class="trait-card strength">
+            <h4>裏返しの強み</h4>
+            <div id="resultStrength"></div>
+          </div>
+          <div class="trait-card pitfall">
+            <h4>気をつけたい落とし穴</h4>
+            <div id="resultPitfall"></div>
+          </div>
+        </div>
+        <div class="hint-card">
+          <h4>今日からできる調律ヒント（その1）</h4>
+          <div id="resultHint"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- メールフォーム（ink帯） -->
+  <div class="mail-band" id="mailPanel">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">FREE REPORT</span>
+        <h2>詳細レポートを無料で受け取る</h2>
+      </div>
+      <p class="lead">診断の続きは、メールでじっくり読める詳細レポートでお届けします。</p>
+      <ul class="slash-list">
+        <li>あなたのタイプの「調律ステップ」3つ（残り2つはレポートで）</li>
+        <li>7タイプすべての解説 — まわりの人の先延ばしも理解できる</li>
+        <li>先延ばしを仕組みで減らす、個別セッションのご案内</li>
+      </ul>
+      <form id="leadForm" novalidate>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="fldName">お名前 <span class="opt">（任意）</span></label>
+            <input type="text" id="fldName" name="name" autocomplete="name" placeholder="例：前村 嘉昭">
+          </div>
+          <div class="form-field">
+            <label for="fldEmail">メールアドレス <span class="opt">（必須）</span></label>
+            <input type="email" id="fldEmail" name="email" autocomplete="email" required placeholder="例：you@example.com">
+          </div>
+          <div class="form-field">
+            <label for="fldPosition">お立場 <span class="opt">（任意）</span></label>
+            <select id="fldPosition" name="position">
+              <option value="">選択してください</option>
+              <option value="経営者・役員">経営者・役員</option>
+              <option value="管理職">管理職</option>
+              <option value="会社員・専門職">会社員・専門職</option>
+              <option value="個人事業主・フリーランス">個人事業主・フリーランス</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+          <div class="hp-field" aria-hidden="true">
+            <label>このフィールドは空のままにしてください<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
+          <label class="consent">
+            <input type="checkbox" id="fldConsent">
+            <span>診断結果レポートと、思考と行動の調律アカデミーからのご案内をメールで受け取ることに同意します（<a href="#" id="privacyLink" target="_blank" rel="noopener">プライバシーポリシー</a>）。</span>
+          </label>
+          <div class="form-error" id="formError"></div>
+          <div>
+            <button type="submit" class="btn" id="btnSubmit"><span>詳細レポートを受け取る</span></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 送信完了 / GAS未設定時CTA -->
+  <div class="done-band hidden" id="donePanel">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en" id="doneBadge">SENT</span>
+        <h2 id="doneHeading">お送りしました</h2>
+      </div>
+      <p class="lead" id="doneLead">詳細レポートをメールでお送りしました。届かない場合は、迷惑メールフォルダもご確認ください。</p>
+      <p>先延ばしは「性格」ではなく「パターン」です。パターンは、仕組みで変えられます。あなたの状況に合わせた調律の進め方は、個別セッションでご相談いただけます。</p>
+      <div class="btn-row">
+        <a class="btn" id="btnConsult" href="#" target="_blank" rel="noopener"><span>個別セッションについて見る</span></a>
+        <button class="btn btn-outline" id="btnRetry"><span>もう一度診断する</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" style="margin-top:26px;">
+    <button class="link-btn" id="btnRetry2">最初からやり直す</button>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="disclaimer">本診断は自己理解を目的としたセルフチェックツールであり、医学的・心理学的な診断や治療を目的とするものではありません。結果は回答時の自己申告に基づく傾向であり、状況によって変化します。</p>
+    <p class="brandline">© GROW WITH — 思考と行動の調律アカデミー</p>
+  </div>
+</footer>
+
+<script>
+'use strict';
+
+/* ============================================================
+ * 設定（デプロイ時にここだけ編集すればよい）
+ * ============================================================ */
+const CONFIG = {
+  // GAS ウェブアプリのURL。空文字のあいだはメールフォームを表示しない
+  gasUrl: '',
+  // 個別セッション・お問い合わせCTA（要・本番URL確認）
+  consultUrl: 'https://growwith-inc.co.jp/contact/',
+  // プライバシーポリシー（要・本番URL確認）
+  privacyUrl: 'https://growwith-inc.co.jp/privacy-policy/'
+};
+
+/* ============================================================
+ * 7タイプ定義
+ * ============================================================ */
+const TYPES = {
+  overwhelmed: {
+    label: '抱え込み型',
+    short: '抱え込み',
+    catch: '多すぎて、動けない',
+    summary: 'タスクの絶対量と複雑さに思考が圧倒され、優先順位づけの段階で止まってしまうパターンです。能力ややる気の問題ではなく、「決める負荷」が処理能力を超えているサインです。',
+    strength: '全体を見渡し、多くの仕事を引き受けられる責任感と視野の広さ。頼られる存在であるほど、このパターンは起こりやすくなります。',
+    pitfall: 'すべてを同じ重さで抱えるため、本当に重要な一手が後回しになりがち。「忙しいのに進んでいない」感覚が続くと、自信の低下につながります。',
+    hint: '朝いちばんに「今日はこの3つだけ」を決めましょう。残りは見えない場所（別リスト）へ移し、視界に入るタスク量を物理的に減らすのがコツです。'
+  },
+  perfectionist: {
+    label: '完璧主義型',
+    short: '完璧主義',
+    catch: '完璧じゃないなら、まだ出せない',
+    summary: '高い品質基準が、着手と完了の両方を遅らせるパターンです。「ちゃんとやりたい」気持ちが強いほど準備に時間をかけ、手放すことが怖くなります。',
+    strength: '妥協しない品質へのこだわりと責任感。仕上がりの信頼性は、周囲からの評価の源泉になっています。',
+    pitfall: '「100点まで出せない」が「0点のまま」を生むこと。かけた時間に対する品質の伸びは、途中から急激に小さくなります。',
+    hint: '着手前に「完成の定義」を3行で書き出し、「まず60点版を出して磨く」を自分に許可しましょう。出してから磨くほうが、結果的に早く100点に近づきます。'
+  },
+  avoider: {
+    label: '不安回避型',
+    short: '不安回避',
+    catch: '気が重いことは、あとまわし',
+    summary: 'タスクそのものではなく、タスクが引き起こす嫌な感情（不安・気まずさ・失敗への恐れ）を避けるパターンです。先延ばしの最も中心的なメカニズムとされ、多くの人に当てはまります。',
+    strength: 'リスクや相手の感情への感受性が高いこと。その慎重さと共感力は、対人関係や品質管理での強みです。',
+    pitfall: '避けるほど不安は膨らみ、タスクはさらに重くなる悪循環。後回しにした自分への自己批判が、次の着手をいっそう難しくします。',
+    hint: '気が重い仕事こそ「5分だけやる」と決めて着手を。嫌な感情のピークは着手の直前にあり、始めてしまうと軽くなることが多いのです。'
+  },
+  crisis: {
+    label: '締切加速型',
+    short: '締切加速',
+    catch: '追い込まれると、火がつく',
+    summary: '締切直前の緊張感を、集中のスイッチとして使うパターンです。短期決戦の爆発力がある一方、締切のない重要な仕事（健康・学び・仕込み）がいつまでも始まらない傾向があります。',
+    strength: 'プレッシャー下での集中力・瞬発力・本番の強さ。修羅場での頼もしさは大きな資産です。',
+    pitfall: '見直しや検証の時間がゼロになり、成果が「間に合わせ」で頭打ちに。突発トラブルがひとつ起きるだけで破綻する綱渡りでもあります。',
+    hint: '本当の締切の少し前に「マイ締切」を置き、人に宣言しましょう。締切を自作できれば、あなたの爆発力はそのまま武器になります。'
+  },
+  decisional: {
+    label: '決断先送り型',
+    short: '決断先送り',
+    catch: '決めるのを、決められない',
+    summary: '作業ではなく「決断」を先に延ばすパターンです。選択肢や情報が増えるほど決めにくくなり、判断を他者や状況に委ねたくなります。',
+    strength: '多面的に検討する慎重さとバランス感覚。拙速な意思決定による失敗が少ないのは、はっきりとした強みです。',
+    pitfall: '「決めない」もひとつの決定であり、選択肢は時間とともに減っていきます。保留中の案件は、頭の中で集中力を奪い続けます。',
+    hint: '内容を決める前に「いつまでに・何を基準に決めるか」を決めましょう。やり直しがきく決定なら、10分で仮決定して前に進むのが有効です。'
+  },
+  dreamer: {
+    label: '構想先行型',
+    short: '構想先行',
+    catch: '頭の中では、もう完成している',
+    summary: '構想・計画・アイデア出しは豊かに進む一方、具体的な作業への変換で止まるパターンです。考えることで「進んだ感覚」が得られるため、行動の遅れに気づきにくいのが特徴です。',
+    strength: 'ビジョンを描く力と発想の豊かさ。方向性を示す構想力は、実行の仕組みさえ整えば大きな推進力になります。',
+    pitfall: '構想と実行のギャップが開くほど「考えているのに進まない」という自己不信に。温めている間に、アイデアの鮮度も落ちていきます。',
+    hint: '構想を閉じる前に、必ず「次の物理的な1アクション」（例：◯◯さんに日程打診のメールを送る）に翻訳してから終えましょう。'
+  },
+  rebel: {
+    label: '自律優先型',
+    short: '自律優先',
+    catch: '指図されると、動きたくなくなる',
+    summary: '他者からの指示・催促・管理によって、着手のエネルギーが下がるパターンです。「やらされ感」への感度が高く、自分で選んだことには力を発揮できるのが特徴です。',
+    strength: '自分の頭で考え、自分のやり方を持つ独立心。裁量のある環境では高い推進力を発揮します。',
+    pitfall: '反発による後回しは、結局は自分の評価と信頼を削ります。「やらない」ことが目的化すると、本来やりたかったことまで止まってしまいます。',
+    hint: '頼まれごとは「自分の言葉」に言い換えてから引き受けましょう。What（何を・いつまでに）は合意し、How（どう進めるか）の裁量を先に確保するのがコツです。'
+  }
+};
+
+const TYPE_ORDER = ['overwhelmed', 'perfectionist', 'avoider', 'crisis', 'decisional', 'dreamer', 'rebel'];
+
+/* ============================================================
+ * 設問（7タイプ × 3問 = 21問、タイプが連続しないインターリーブ固定順）
+ * ============================================================ */
+const QUESTIONS = [
+  // Round 1
+  { type: 'overwhelmed',   text: '複数の仕事が同時に重なると、優先順位がつけられず、どれにも手がつかないことがある。' },
+  { type: 'perfectionist', text: '資料や成果物の細部が気になり、締切ギリギリまで手直しを続けてしまう。' },
+  { type: 'avoider',       text: '気が重い連絡や依頼（お詫び・催促・断りなど）を後回しにしがちだ。' },
+  { type: 'crisis',        text: '締切直前のプレッシャーがあるほうが、集中力や実力を発揮できると感じる。' },
+  { type: 'decisional',    text: '選択肢が複数あると、決めきれずに判断を保留することが多い。' },
+  { type: 'dreamer',       text: 'アイデアや構想を練るのは得意だが、具体的な作業に落とし込むのは苦手だ。' },
+  { type: 'rebel',         text: '人から「早くやって」と急かされると、かえってやる気が下がることがある。' },
+  // Round 2
+  { type: 'overwhelmed',   text: 'やることが多すぎるとき、どこから手をつけるべきか迷っているうちに時間が過ぎてしまう。' },
+  { type: 'perfectionist', text: '「中途半端な状態で出すくらいなら、まだ出さないほうがいい」と感じることが多い。' },
+  { type: 'avoider',       text: '失敗する可能性が高い仕事ほど、着手までに時間がかかる。' },
+  { type: 'crisis',        text: '余裕のある時期には手がつかず、追い込まれてから一気に仕上げることが多い。' },
+  { type: 'decisional',    text: '自分ひとりで決めるより、誰かの意見や承認を待ってから動きたくなる。' },
+  { type: 'dreamer',       text: '新しい計画を次々に思いつく一方で、途中で止まったままの仕事がいくつもある。' },
+  { type: 'rebel',         text: '自分のやり方やペースに口を出されると、反発を感じて動きが鈍る。' },
+  // Round 3
+  { type: 'overwhelmed',   text: '大きな仕事は、全体像を考えるだけで気力を消耗し、着手が遅れることが多い。' },
+  { type: 'perfectionist', text: '新しいことを始めるとき、十分な準備や情報が揃うまで着手を遅らせる傾向がある。' },
+  { type: 'avoider',       text: '評価やフィードバックを受ける場面を、つい避けたり先に延ばしたりすることがある。' },
+  { type: 'crisis',        text: '決まりきった仕事より、緊急対応やトラブル処理のほうがやる気が出る。' },
+  { type: 'decisional',    text: '「もう少し情報が集まってから決めよう」と考えて、決断を先に延ばすことがよくある。' },
+  { type: 'dreamer',       text: '頭の中では何度も段取りを考えているのに、実際の行動はまだ始まっていないことが多い。' },
+  { type: 'rebel',         text: '納得できないルールや手順に沿って進める仕事は、つい後回しにしてしまう。' }
+];
+
+const LIKERT = [
+  { value: 5, label: '非常に当てはまる' },
+  { value: 4, label: 'やや当てはまる' },
+  { value: 3, label: 'どちらともいえない' },
+  { value: 2, label: 'あまり当てはまらない' },
+  { value: 1, label: 'ほとんど当てはまらない' }
+];
+
+// 判定しきい値
+const HYBRID_GAP = 8;   // 1位と2位の差がこれ以下ならハイブリッド表示
+const LOW_CEILING = 40; // 全タイプがこの値未満なら「先延ばし傾向は強くない」
+
+/* ============================================================
+ * スコアリング（純関数）
+ * ============================================================ */
+function computeResult(answers) {
+  const sums = {};
+  TYPE_ORDER.forEach(k => { sums[k] = 0; });
+  answers.forEach((v, i) => { sums[QUESTIONS[i].type] += v; });
+
+  const scores = {};
+  TYPE_ORDER.forEach(k => {
+    scores[k] = Math.round((sums[k] - 3) / 12 * 100);
+  });
+
+  const ranked = TYPE_ORDER
+    .map(k => ({ key: k, score: scores[k] }))
+    .sort((a, b) => b.score - a.score); // 同点は TYPE_ORDER 順を維持（安定ソート）
+
+  const primary = ranked[0].key;
+  const secondary = ranked[1].key;
+  const isHybrid = (ranked[0].score - ranked[1].score) <= HYBRID_GAP;
+  const isLow = ranked[0].score < LOW_CEILING;
+
+  return { scores, ranked, primary, secondary, isHybrid, isLow };
+}
+
+/* ============================================================
+ * 状態・画面制御
+ * ============================================================ */
+const state = {
+  qIndex: 0,
+  answers: new Array(QUESTIONS.length).fill(null),
+  result: null,
+  advanceTimer: null
+};
+
+const $ = id => document.getElementById(id);
+
+function showView(name) {
+  $('viewLanding').classList.toggle('hidden', name !== 'landing');
+  $('viewQuiz').classList.toggle('hidden', name !== 'quiz');
+  $('viewResult').classList.toggle('hidden', name !== 'result');
+  if (name === 'quiz') {
+    $('viewQuiz').scrollIntoView({ behavior: 'smooth' }); // ヒーローを飛ばして設問へ
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+/* --- ランディング --- */
+function initLanding() {
+  const list = $('typeChips');
+  TYPE_ORDER.forEach((k, i) => {
+    const row = document.createElement('div');
+    row.className = 'type-row';
+    const num = document.createElement('span');
+    num.className = 'num';
+    num.textContent = String(i + 1).padStart(2, '0');
+    const name = document.createElement('span');
+    name.className = 't-name';
+    name.textContent = TYPES[k].label;
+    const c = document.createElement('span');
+    c.className = 't-catch';
+    c.textContent = TYPES[k].catch;
+    row.appendChild(num); row.appendChild(name); row.appendChild(c);
+    list.appendChild(row);
+  });
+  try {
+    if (localStorage.getItem('procras_result')) {
+      $('btnLastResult').classList.remove('hidden');
+    }
+  } catch (e) { /* localStorage 不可の環境では無視 */ }
+}
+
+/* --- 設問 --- */
+function renderQuestion(animate) {
+  const i = state.qIndex;
+  const q = QUESTIONS[i];
+  $('progressLabel').innerHTML = 'Q' + (i + 1) + ' <small>/ ' + QUESTIONS.length + '</small>';
+  $('progressFill').style.width = Math.round(i / QUESTIONS.length * 100) + '%';
+  $('qBgNum').textContent = String(i + 1).padStart(2, '0');
+  $('qText').textContent = q.text;
+  $('btnBack').style.visibility = i === 0 ? 'hidden' : 'visible';
+
+  const box = $('likertBtns');
+  box.innerHTML = '';
+  LIKERT.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'likert-btn' + (state.answers[i] === opt.value ? ' selected' : '');
+    btn.innerHTML = '<span class="key">' + opt.value + '</span><span></span>';
+    btn.lastChild.textContent = opt.label;
+    btn.addEventListener('click', () => selectAnswer(opt.value));
+    box.appendChild(btn);
+  });
+
+  if (animate) {
+    const block = $('qBlock');
+    block.classList.remove('swap');
+    void block.offsetWidth; // アニメーション再トリガー
+    block.classList.add('swap');
+  }
+}
+
+function selectAnswer(value) {
+  if (state.advanceTimer) return; // 進行中の二重入力を防ぐ
+  state.answers[state.qIndex] = value;
+  renderQuestion(false); // 選択ハイライト
+  state.advanceTimer = setTimeout(() => {
+    state.advanceTimer = null;
+    if (state.qIndex < QUESTIONS.length - 1) {
+      state.qIndex++;
+      renderQuestion(true);
+    } else {
+      finishQuiz();
+    }
+  }, 260);
+}
+
+function finishQuiz() {
+  state.result = computeResult(state.answers);
+  try {
+    localStorage.setItem('procras_result', JSON.stringify({
+      savedAt: new Date().toISOString(),
+      answers: state.answers
+    }));
+  } catch (e) { /* 無視 */ }
+  renderResult(state.result);
+  showView('result');
+}
+
+/* --- 結果 --- */
+function renderResult(r) {
+  const p = TYPES[r.primary];
+  const s = TYPES[r.secondary];
+
+  const nameEl = $('resultTypeName');
+  if (r.isLow) {
+    $('resultHeading').textContent = '診断結果';
+    nameEl.textContent = '先延ばし傾向は強くありません';
+    $('resultCatch').textContent = '着手と完了のバランスが取れている状態です';
+    $('hybridNote').innerHTML = '';
+    $('descHeading').textContent = '参考：相対的に高かった傾向「' + p.label + '」';
+  } else if (r.isHybrid) {
+    $('resultHeading').textContent = 'あなたの最も強いパターン';
+    nameEl.innerHTML = '';
+    const m1 = document.createElement('span'); m1.className = 'marker'; m1.textContent = p.label;
+    const m2 = document.createElement('span'); m2.className = 'marker'; m2.textContent = s.label;
+    nameEl.appendChild(m1);
+    nameEl.appendChild(document.createTextNode(' × '));
+    nameEl.appendChild(m2);
+    $('resultCatch').textContent = p.catch + ' ／ ' + s.catch;
+    const note = document.createElement('span');
+    note.className = 'hybrid-note';
+    note.textContent = '2つの傾向が拮抗しています（解説は「' + p.label + '」を中心に表示）';
+    $('hybridNote').innerHTML = '';
+    $('hybridNote').appendChild(note);
+    $('descHeading').textContent = '「' + p.label + '」の特徴';
+  } else {
+    $('resultHeading').textContent = 'あなたの最も強いパターン';
+    nameEl.innerHTML = '';
+    const m = document.createElement('span'); m.className = 'marker'; m.textContent = p.label;
+    nameEl.appendChild(m);
+    $('resultCatch').textContent = p.catch;
+    $('hybridNote').innerHTML = '';
+    $('descHeading').textContent = 'このパターンの特徴';
+  }
+
+  $('resultSummary').textContent = r.isLow
+    ? '今回の回答からは、目立った先延ばしパターンは見られませんでした。参考として、相対的に高かった「' + p.label + '」（' + p.catch + '）の特徴を以下に示します。忙しさや環境の変化でパターンは変わるため、違和感が出たときに再チェックしてみてください。'
+    : p.summary;
+  $('resultStrength').textContent = p.strength;
+  $('resultPitfall').textContent = p.pitfall;
+  $('resultHint').textContent = p.hint;
+
+  drawRadar(r.scores);
+  drawScoreRows(r);
+
+  // メールフォーム or CTA
+  const hasGas = !!CONFIG.gasUrl;
+  $('mailPanel').classList.toggle('hidden', !hasGas);
+  $('donePanel').classList.toggle('hidden', hasGas);
+  if (!hasGas) {
+    $('doneBadge').textContent = 'NEXT STEP';
+    $('doneHeading').textContent = '先延ばしは、調律できます';
+    $('doneLead').textContent = '結果はこの画面でご確認いただけます（スクリーンショット保存がおすすめです）。';
+  }
+}
+
+function drawScoreRows(r) {
+  const box = $('scoreRows');
+  box.innerHTML = '';
+  const fills = [];
+  r.ranked.forEach((item, idx) => {
+    const row = document.createElement('div');
+    row.className = 'score-row' + (idx === 0 ? ' primary' : '');
+    const name = document.createElement('span');
+    name.className = 'sr-name';
+    name.textContent = TYPES[item.key].label;
+    const bar = document.createElement('div');
+    bar.className = 'sr-bar';
+    const fill = document.createElement('div');
+    fill.className = 'sr-fill';
+    bar.appendChild(fill);
+    const val = document.createElement('span');
+    val.className = 'sr-val';
+    val.textContent = item.score;
+    row.appendChild(name); row.appendChild(bar); row.appendChild(val);
+    box.appendChild(row);
+    fills.push([fill, Math.max(item.score, 2)]);
+  });
+  // バー伸長アニメーション（transition 発火のため描画後に width を設定）
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    fills.forEach(([el, w]) => { el.style.width = w + '%'; });
+  }));
+}
+
+/* --- レーダーチャート（7角形 SVG） --- */
+function drawRadar(scores) {
+  const NS = 'http://www.w3.org/2000/svg';
+  const size = 410, cx = 205, cy = 210, R = 130;
+  const n = TYPE_ORDER.length;
+  const angle = i => -Math.PI / 2 + i * 2 * Math.PI / n;
+  const pt = (i, ratio) => [cx + R * ratio * Math.cos(angle(i)), cy + R * ratio * Math.sin(angle(i))];
+
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 ' + size + ' ' + size);
+  svg.setAttribute('role', 'img');
+  svg.setAttribute('aria-label', '7タイプのスコアを示すレーダーチャート');
+
+  // グリッド（25/50/75/100）
+  [0.25, 0.5, 0.75, 1].forEach(ratio => {
+    const poly = document.createElementNS(NS, 'polygon');
+    poly.setAttribute('points', TYPE_ORDER.map((_, i) => pt(i, ratio).join(',')).join(' '));
+    poly.setAttribute('fill', ratio === 1 ? 'rgba(255,255,255,.45)' : 'none');
+    poly.setAttribute('stroke', 'rgba(34,31,26,.22)');
+    poly.setAttribute('stroke-width', '1');
+    svg.appendChild(poly);
+  });
+  // 軸線
+  TYPE_ORDER.forEach((_, i) => {
+    const line = document.createElementNS(NS, 'line');
+    const [x, y] = pt(i, 1);
+    line.setAttribute('x1', cx); line.setAttribute('y1', cy);
+    line.setAttribute('x2', x);  line.setAttribute('y2', y);
+    line.setAttribute('stroke', 'rgba(34,31,26,.22)');
+    line.setAttribute('stroke-width', '1');
+    svg.appendChild(line);
+  });
+  // データ（展開アニメ用グループ）
+  const g = document.createElementNS(NS, 'g');
+  g.setAttribute('class', 'radar-data');
+  const data = document.createElementNS(NS, 'polygon');
+  data.setAttribute('points', TYPE_ORDER.map((k, i) => pt(i, Math.max(scores[k], 3) / 100).join(',')).join(' '));
+  data.setAttribute('fill', 'rgba(232,118,26,.30)');
+  data.setAttribute('stroke', '#C95E08');
+  data.setAttribute('stroke-width', '2.5');
+  data.setAttribute('stroke-linejoin', 'round');
+  g.appendChild(data);
+  TYPE_ORDER.forEach((k, i) => {
+    const [x, y] = pt(i, Math.max(scores[k], 3) / 100);
+    const dot = document.createElementNS(NS, 'circle');
+    dot.setAttribute('cx', x); dot.setAttribute('cy', y); dot.setAttribute('r', '4.5');
+    dot.setAttribute('fill', '#C95E08');
+    g.appendChild(dot);
+  });
+  svg.appendChild(g);
+  // ラベル
+  TYPE_ORDER.forEach((k, i) => {
+    const a = angle(i);
+    const lx = cx + (R + 27) * Math.cos(a);
+    const ly = cy + (R + 27) * Math.sin(a);
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('x', lx);
+    t.setAttribute('y', ly + 4);
+    t.setAttribute('font-size', '13.5');
+    t.setAttribute('fill', '#4c463d');
+    t.setAttribute('font-weight', '700');
+    const c = Math.cos(a);
+    t.setAttribute('text-anchor', c > 0.3 ? 'start' : (c < -0.3 ? 'end' : 'middle'));
+    t.textContent = TYPES[k].short;
+    svg.appendChild(t);
+  });
+
+  const box = $('radarBox');
+  box.innerHTML = '';
+  box.appendChild(svg);
+}
+
+/* ============================================================
+ * リード送信（GAS）
+ * ============================================================ */
+async function submitLead(ev) {
+  ev.preventDefault();
+  const errBox = $('formError');
+  errBox.style.display = 'none';
+
+  const email = $('fldEmail').value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errBox.textContent = 'メールアドレスの形式をご確認ください。';
+    errBox.style.display = 'block';
+    return;
+  }
+  if (!$('fldConsent').checked) {
+    errBox.textContent = 'プライバシーポリシーへの同意にチェックをお願いします。';
+    errBox.style.display = 'block';
+    return;
+  }
+
+  const btn = $('btnSubmit');
+  btn.disabled = true;
+  btn.firstElementChild.textContent = '送信中…';
+
+  const r = state.result;
+  const payload = {
+    name: $('fldName').value.trim(),
+    email: email,
+    position: $('fldPosition').value,
+    website: document.querySelector('input[name="website"]').value, // honeypot
+    primary: r.primary,
+    secondary: r.secondary,
+    isHybrid: r.isHybrid,
+    isLow: r.isLow,
+    scores: r.scores,
+    answers: state.answers,
+    ref: new URLSearchParams(location.search).get('ref') || '',
+    ua: navigator.userAgent
+  };
+
+  try {
+    const res = await fetch(CONFIG.gasUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // preflight回避（GAS定石）
+      body: JSON.stringify(payload),
+      redirect: 'follow'
+    });
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.error || 'server error');
+    $('mailPanel').classList.add('hidden');
+    $('donePanel').classList.remove('hidden');
+    window.scrollTo({ top: $('donePanel').offsetTop - 40, behavior: 'smooth' });
+  } catch (e) {
+    errBox.textContent = '送信できませんでした。通信環境をご確認のうえ、時間をおいて再度お試しください。';
+    errBox.style.display = 'block';
+    btn.disabled = false;
+    btn.firstElementChild.textContent = '詳細レポートを受け取る';
+  }
+}
+
+/* ============================================================
+ * 初期化・イベント
+ * ============================================================ */
+function resetQuiz() {
+  state.qIndex = 0;
+  state.answers = new Array(QUESTIONS.length).fill(null);
+  state.result = null;
+  $('leadForm').reset();
+  $('btnSubmit').disabled = false;
+  $('btnSubmit').firstElementChild.textContent = '詳細レポートを受け取る';
+  renderQuestion(true);
+  showView('quiz');
+}
+
+function init() {
+  initLanding();
+  $('privacyLink').href = CONFIG.privacyUrl;
+  $('btnConsult').href = CONFIG.consultUrl;
+
+  $('btnStart').addEventListener('click', resetQuiz);
+  $('btnRetry').addEventListener('click', resetQuiz);
+  $('btnRetry2').addEventListener('click', resetQuiz);
+  $('btnBack').addEventListener('click', () => {
+    if (state.qIndex > 0) { state.qIndex--; renderQuestion(true); }
+  });
+  $('btnLastResult').addEventListener('click', () => {
+    try {
+      const saved = JSON.parse(localStorage.getItem('procras_result'));
+      if (saved && Array.isArray(saved.answers) && saved.answers.length === QUESTIONS.length) {
+        state.answers = saved.answers;
+        state.result = computeResult(saved.answers);
+        renderResult(state.result);
+        showView('result');
+      }
+    } catch (e) { /* 破損時は無視 */ }
+  });
+  $('leadForm').addEventListener('submit', submitLead);
+
+  document.addEventListener('keydown', ev => {
+    if ($('viewQuiz').classList.contains('hidden')) return;
+    if (ev.key >= '1' && ev.key <= '5') selectAnswer(Number(ev.key));
+  });
+
+  // デバッグモード（開発検証用）: ?debug=result / ?debug=low
+  const debug = new URLSearchParams(location.search).get('debug');
+  if (debug === 'result' || debug === 'low') {
+    state.answers = QUESTIONS.map((q, i) => {
+      if (debug === 'low') return (i % 3 === 0) ? 2 : 1;
+      if (q.type === 'avoider') return 5;
+      if (q.type === 'perfectionist') return 4;
+      return ((i * 7) % 3) + 1;
+    });
+    state.result = computeResult(state.answers);
+    renderResult(state.result);
+    showView('result');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
