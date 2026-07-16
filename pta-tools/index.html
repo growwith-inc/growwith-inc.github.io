@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PTA配信ツール比較｜分析レポート</title>
+  <style>
+    :root{--ink:#183347;--muted:#647481;--blue:#176b87;--cyan:#3ab7b4;--navy:#123d56;--cream:#f5f1e8;--line:#dce5e7;--white:#fff;--orange:#ef8a3d;--green:#74a85c;--red:#c95d55;--shadow:0 18px 50px rgba(18,61,86,.10)}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Sans",Meiryo,sans-serif;line-height:1.75;background:#f7faf9}
+    .hero{background:linear-gradient(125deg,#103c55 0%,#176b87 55%,#36aaa8 100%);color:#fff;padding:64px 24px 54px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:380px;height:380px;border:70px solid rgba(255,255,255,.07);border-radius:50%;right:-80px;top:-160px}.wrap{max-width:1120px;margin:auto;position:relative;z-index:1}.eyebrow{font-size:13px;letter-spacing:.14em;font-weight:700;color:#b8f2ec}.hero h1{font-size:clamp(30px,5vw,54px);line-height:1.18;margin:10px 0 18px;letter-spacing:-.03em}.hero p{max-width:760px;font-size:17px;margin:0;color:#e6f6f4}.meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.pill{font-size:13px;border:1px solid rgba(255,255,255,.35);border-radius:99px;padding:6px 12px;background:rgba(255,255,255,.08)}
+    nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}nav .wrap{display:flex;gap:5px;overflow:auto;padding:10px 18px}nav a{color:var(--ink);text-decoration:none;white-space:nowrap;font-size:13px;font-weight:700;padding:7px 11px;border-radius:8px}nav a:hover{background:#e8f4f2;color:var(--blue)}
+    main{padding:42px 20px 80px}section{max-width:1120px;margin:0 auto 64px;scroll-margin-top:70px}.section-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:22px}.num{width:38px;height:38px;flex:0 0 38px;border-radius:12px;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800}.section-head h2{margin:0;font-size:clamp(24px,3vw,34px);line-height:1.3}.section-head p{margin:5px 0 0;color:var(--muted)}
+    .summary{margin-top:-28px}.lead-card{background:#fff;padding:28px;border-radius:18px;box-shadow:var(--shadow);border-top:5px solid var(--cyan)}.lead-card h2{margin:0 0 10px;font-size:24px}.takeaways{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}.take{background:#f1f7f6;padding:18px;border-radius:13px}.take strong{display:block;font-size:29px;color:var(--blue);line-height:1.15}.take span{font-size:13px;color:var(--muted)}
+    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 7px 24px rgba(18,61,86,.055)}.card h3{margin:0 0 4px;font-size:22px}.tag{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--blue);border-radius:99px;padding:3px 9px;margin-bottom:14px}.card dl{margin:0}.card dt{font-size:11px;color:var(--muted);font-weight:800;margin-top:12px}.card dd{margin:2px 0;font-size:14px}.price{font-weight:800;color:var(--navy)}
+    .table-wrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:16px}table{border-collapse:collapse;width:100%;min-width:820px}th,td{padding:15px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:13px}thead th{background:var(--navy);color:#fff;position:sticky;top:0}tbody th{color:var(--navy);background:#f4f8f7;min-width:130px}.yes{color:#147a69;font-weight:800}.partial{color:#b06d16;font-weight:800}.no{color:#9b514c}
+    .stats{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}.panel h3{margin:0 0 4px}.caption{color:var(--muted);font-size:12px;margin-bottom:18px}.bar-row{display:grid;grid-template-columns:180px 1fr 48px;gap:10px;align-items:center;margin:11px 0;font-size:13px}.bar{height:16px;background:#edf1f2;border-radius:99px;overflow:hidden}.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--cyan))}.orange{background:var(--orange)}.gray{background:#aab3b5}.yellow{background:#e6b536}.light{background:#6f9fbb}.legend-note{font-size:12px;color:var(--muted);margin-top:15px;padding-top:12px;border-top:1px solid var(--line)}
+    .rank{counter-reset:item;margin:8px 0 0;padding:0;list-style:none}.rank li{counter-increment:item;display:grid;grid-template-columns:28px 1fr auto;gap:9px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}.rank li:before{content:counter(item);width:24px;height:24px;border-radius:7px;background:#e5f3f1;display:grid;place-items:center;font-size:12px;font-weight:800;color:var(--blue)}.count{font-weight:800;color:var(--blue)}
+    .themes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.theme{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.theme h3{font-size:16px;margin:0 0 8px;color:var(--blue)}.theme p{font-size:13px;color:var(--muted);margin:0}.theme .icon{font-size:25px;margin-bottom:7px}
+    .decision{background:linear-gradient(135deg,#fff,#eef7f5);border:1px solid #cfe1df;border-radius:20px;padding:28px}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}.step{background:#fff;border-radius:12px;padding:17px;border:1px solid var(--line)}.step b{display:block;color:var(--blue);margin-bottom:5px}.step span{font-size:13px;color:var(--muted)}
+    .callout{border-left:5px solid var(--orange);background:#fff5eb;padding:18px 20px;border-radius:0 12px 12px 0;margin-top:18px}.callout strong{display:block}.callout p{margin:5px 0 0;font-size:13px}.limits{display:grid;grid-template-columns:1fr 1fr;gap:16px}.limit{background:#fff;border-radius:14px;padding:20px;border:1px solid var(--line)}.limit h3{margin:0 0 10px;font-size:17px}.limit ul{padding-left:20px;margin:0}.limit li{margin:7px 0;font-size:13px}
+    .subhead{font-size:20px;margin:28px 0 12px;color:var(--navy)}.insights{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}.insight{background:#fff;border:1px solid var(--line);border-radius:14px;padding:19px}.insight b{display:block;color:var(--blue);font-size:15px;margin-bottom:6px}.insight p{font-size:13px;color:var(--muted);margin:0}.quote-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.quote{background:#fff;border:1px solid var(--line);border-radius:14px;padding:19px}.quote h3{font-size:16px;color:var(--blue);margin:0 0 6px}.quote p{font-size:13px;color:var(--muted);margin:0}.quote .evidence{display:block;margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);font-size:12px;color:var(--ink)}.fine{font-size:11px;color:var(--muted)}.source-note{background:#eef5f7;border-radius:12px;padding:15px 18px;font-size:12px;color:var(--muted);margin-top:14px}.compact td,.compact th{padding:10px 11px}.pct{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}.badge{display:inline-block;padding:2px 8px;border-radius:99px;background:#e5f3f1;color:var(--blue);font-size:11px;font-weight:800}details{background:#fff;border:1px solid var(--line);border-radius:14px;margin:10px 0}summary{cursor:pointer;padding:15px 18px;font-weight:800;color:var(--navy)}details>div{padding:0 18px 18px}details ul{margin:0;padding-left:20px}details li{font-size:13px;margin:6px 0}.actor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.actor{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.actor h3{font-size:16px;margin:0 0 7px;color:var(--blue)}.actor ol{padding-left:20px;margin:0}.actor li{font-size:13px;margin:6px 0}
+    footer{background:#102f43;color:#d6e5e9;padding:30px 20px;font-size:12px}footer p{max-width:1120px;margin:auto}.print-note{display:none}
+    @media(max-width:900px){.cards{grid-template-columns:1fr 1fr}.stats,.limits{grid-template-columns:1fr}.themes,.insights,.quote-grid{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.takeaways{grid-template-columns:1fr}.actor-grid{grid-template-columns:1fr}}
+    @media(max-width:560px){.cards,.themes,.steps,.insights,.quote-grid{grid-template-columns:1fr}.hero{padding-top:44px}.bar-row{grid-template-columns:125px 1fr 38px}.lead-card{padding:20px}}
+    @media print{nav{display:none}body{background:#fff}.hero{padding:30px}.hero h1{font-size:34px}main{padding:25px 0}section{break-inside:avoid;margin-bottom:35px}.card,.panel,.theme,.limit{box-shadow:none}.print-note{display:block}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">KAWASAKI PTA COMMUNICATION TOOLS</div>
+      <h1>PTA配信ツール比較<br>詳細分析レポート</h1>
+      <p>4サービスの比較、7区別の回答傾向、利用者の評価・料金回答、33件の自由記述を一体的に整理。「配信できるか」だけでなく、PTAの自立性、運用負担、情報到達、個人情報、学校との役割分担まで読み解きます。</p>
+      <div class="meta"><span class="pill">詳細版</span><span class="pill">原資料：23ページ</span><span class="pill">調査：146回答</span><span class="pill">自由記述：33件</span><span class="pill">資料基準日：2024年1月9日</span></div>
+    </div>
+  </header>
+  <nav><div class="wrap"><a href="#overview">要点</a><a href="#services">4社比較</a><a href="#survey">全体結果</a><a href="#districts">区別結果</a><a href="#actual">利用実態</a><a href="#needs">ニーズ</a><a href="#voices">自由記述</a><a href="#decision">導入判断</a><a href="#limits">留意点</a></div></nav>
+  <main>
+    <section class="summary" id="overview">
+      <div class="lead-card">
+        <h2>結論：最大の論点は「機能数」より、PTAが自分で発信・管理できるか</h2>
+        <p>原資料からは、学校側に配信を依頼する運用が中心で、PTA独自ツールの普及は限定的です。一方、導入ニーズは、単なるメール配信ではなく、アンケート、名簿、出欠、履歴、個別連絡、集金などを一体化した「PTA運営基盤」へ広がっています。</p>
+        <div class="takeaways">
+          <div class="take"><strong>50%</strong><span>ミマモルメ配信を学校に依頼して使用</span></div>
+          <div class="take"><strong>24%</strong><span>ミマモルメ以外の独自ツールを使用</span></div>
+          <div class="take"><strong>39%</strong><span>今後の独自ツール導入予定なし</span></div>
+        </div>
+        <div class="callout"><strong>読み取りの核心</strong><p>「学校に頼めば配信できる」状態と、「PTAが必要な時に対象を選んで即時配信し、回答・名簿・履歴を管理できる」状態は、運営上まったく異なります。導入判断では、学校との共有ツールか、PTA独立の基盤かを先に決める必要があります。</p></div>
+        <h3 class="subhead">原資料全体から見える6つの構造</h3>
+        <div class="insights">
+          <div class="insight"><b>1｜「利用可能」と「自律運用」は別</b><p>ミマモルメを何らかの形で利用する回答は多い一方、PTAが自由に使用できる回答は2%。学校への依頼・許可・配信順序が、速報性と運用裁量を左右しています。</p></div>
+          <div class="insight"><b>2｜紙削減だけでは成功を測れない</b><p>印刷・配布の負担軽減は共通の効果ですが、未開封、未登録、スマホを持たない世帯への対応により、紙との二重運用が残るケースも報告されています。</p></div>
+          <div class="insight"><b>3｜導入負担は初年度と年度更新に集中</b><p>登録案内、名簿整備、学年・クラス更新、管理権限の引継ぎ、未登録者フォローが負担。料金だけでなく、毎年度の再設定時間を評価する必要があります。</p></div>
+          <div class="insight"><b>4｜情報到達率はツール単体で決まらない</b><p>重要度の認識、通知設定、登録率、既読確認、保護者のデジタル習熟度が影響します。「配信した」ことと「必要な人が読んだ」ことを分けて管理する必要があります。</p></div>
+          <div class="insight"><b>5｜学校・PTAの二重ツール問題</b><p>学校用とPTA用のアプリが分かれると、保護者の負担と見落としリスクが増えます。一方、学校の配信基盤に統合するとPTAの独立性が弱まるというトレードオフがあります。</p></div>
+          <div class="insight"><b>6｜単P任せを越える共同調達ニーズ</b><p>市・区・中学校区単位で共通ツール、共通ルール、導入事例を整備してほしいという声があります。小規模校の費用負担やデジタル人材格差をならす視点です。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-head"><div class="num">1</div><div><h2>4サービスの位置づけ</h2><p>原資料の記載を、PTAの利用目的に沿って再構成</p></div></div>
+      <div class="cards">
+        <article class="card"><h3>スクリレ</h3><span class="tag">学校連絡＋PTA</span><dl><dt>強み</dt><dd>個人情報登録なし、基本無料、ポイントで学校応援</dd><dt>機能</dt><dd>お便り、出欠、健康観察、個別連絡、アンケート</dd><dt>PTA適合</dt><dd>「学Pプラン」。学校またはPTAの有償契約範囲を他方が利用可能</dd><dt>原資料記載料金</dt><dd class="price">無料／有料 月3,300円〜</dd></dl></article>
+        <article class="card"><h3>がくぷり</h3><span class="tag">PTA運営統合型</span><dl><dt>強み</dt><dd>PTA管理、名簿、会議室、集金、書庫、翻訳まで多機能</dd><dt>機能</dt><dd>配信、アンケート、双方向連絡、出欠、集金など</dd><dt>PTA適合</dt><dd>役員・委員管理、グループ、履歴閲覧を明示</dd><dt>原資料記載料金</dt><dd class="price">月22,000円〜／999人</dd></dl></article>
+        <article class="card"><h3>ミマモルメ</h3><span class="tag">登下校見守り型</span><dl><dt>強み</dt><dd>登下校検知を中心に保護者の安心を支援</dd><dt>機能</dt><dd>登下校通知、学校メール、欠席遅刻連絡（オプション）</dd><dt>PTA適合</dt><dd>PTA専用機能はなく、学校と同様の配信主体という位置づけ</dd><dt>原資料記載料金</dt><dd class="price">保護者 月515円等／学校・PTA負担なし</dd></dl></article>
+        <article class="card"><h3>マチコミ</h3><span class="tag">汎用連絡網型</span><dl><dt>強み</dt><dd>名簿型・グループ型の管理、多機能、無料プラン</dd><dt>機能</dt><dd>配信、出欠、共有、休み連絡、安否、カレンダー等</dd><dt>PTA適合</dt><dd>専用機能はないが、PTAを管理者として導入可能</dd><dt>原資料記載料金</dt><dd class="price">無料／有料 月5,200円〜</dd></dl></article>
+      </div>
+      <div class="table-wrap" style="margin-top:20px"><table>
+        <thead><tr><th>比較軸</th><th>スクリレ</th><th>がくぷり</th><th>ミマモルメ</th><th>マチコミ</th></tr></thead>
+        <tbody>
+          <tr><th>主目的</th><td>学校・PTAのお便り電子化</td><td>学校・PTA運営の統合</td><td>登下校見守り</td><td>学校・団体の連絡網</td></tr>
+          <tr><th>PTA専用性</th><td class="yes">専用プランあり</td><td class="yes">PTA管理機能あり</td><td class="no">専用機能なし</td><td class="partial">専用機能なし／管理者利用可</td></tr>
+          <tr><th>導入コスト構造</th><td>低コストから開始</td><td>団体契約・比較的高額</td><td>主に保護者負担</td><td>無料開始、有料拡張</td></tr>
+          <tr><th>向くケース</th><td>学校と連携し紙削減</td><td>名簿・集金等も統合</td><td>既存の見守り基盤を活用</td><td>まず独自配信網を持つ</td></tr>
+          <tr><th>確認すべき点</th><td>学校契約との権限関係</td><td>費用対効果と引継ぎ</td><td>PTAの直接配信権限</td><td>広告、管理権限、有料移行</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="survey">
+      <div class="section-head"><div class="num">2</div><div><h2>アンケート結果の読み解き</h2><p>146回答。同一校の複数回答もカウントされているため、回答者認識の分布として解釈</p></div></div>
+      <div class="stats">
+        <div class="panel"><h3>ミマモルメをPTAで使用できているか</h3><div class="caption">全体・構成比</div>
+          <div class="bar-row"><span>学校に配信を依頼</span><div class="bar"><div class="fill orange" style="width:50%"></div></div><b>50%</b></div>
+          <div class="bar-row"><span>低頻度で学校に依頼</span><div class="bar"><div class="fill gray" style="width:25%"></div></div><b>25%</b></div>
+          <div class="bar-row"><span>全く使用できない</span><div class="bar"><div class="fill yellow" style="width:15%"></div></div><b>15%</b></div>
+          <div class="bar-row"><span>その他</span><div class="bar"><div class="fill light" style="width:8%"></div></div><b>8%</b></div>
+          <div class="bar-row"><span>自由に使用</span><div class="bar"><div class="fill" style="width:2%"></div></div><b>2%</b></div>
+          <div class="legend-note">自由利用は2%にとどまり、75%が学校への依頼を伴う運用。スピード、対象者選択、予約配信、履歴管理などで学校依存が生じやすい構造です。</div>
+        </div>
+        <div class="panel"><h3>PTA独自ツールの利用</h3><div class="caption">ミマモルメ以外</div>
+          <div style="display:grid;grid-template-columns:24fr 76fr;height:54px;border-radius:12px;overflow:hidden;margin:25px 0 10px"><div style="background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:800">利用 24%</div><div style="background:#e9edef;display:grid;place-items:center;font-weight:800">未利用 76%</div></div>
+          <p style="font-size:13px;color:var(--muted)">独自利用は少数ですが、利用校では「がくぷり」11校、「マチコミ」7校、「スクリレ」6校が上位。LINE 3校、れんらくがかりスクール2校、その他は各1校でした。</p>
+          <h3 style="margin-top:22px">今後の導入意向</h3>
+          <p style="font-size:13px"><b>既に導入 19%</b>／近いうちに導入 6%／会員同意が得られない 1%／学校同意が得られない 1%／<b>導入予定なし 39%</b>／その他・検討中等 34%</p>
+        </div>
+      </div>
+      <div class="panel" style="margin-top:18px"><h3>検討候補として挙がったツール</h3><ol class="rank"><li><span>がくぷり</span><span class="count">9校</span></li><li><span>マチコミ</span><span class="count">6校</span></li><li><span>スクリレ</span><span class="count">5校</span></li><li><span>LINE WORKS</span><span class="count">2校</span></li><li><span>LINE公式、Googleフォーム、Google Workspace、kintone、CODMON等</span><span class="count">各1校</span></li></ol></div>
+    </section>
+
+    <section id="districts">
+      <div class="section-head"><div class="num">3</div><div><h2>7区別に見る利用環境の差</h2><p>比率は原資料の円グラフ表示値。母数と重複回答の影響があるため、順位づけではなく「運用環境の違い」を捉える</p></div></div>
+      <h3 class="subhead">設問①：ミマモルメをPTAで使用できているか</h3>
+      <div class="table-wrap"><table class="compact">
+        <thead><tr><th>区</th><th>自由に使用</th><th>学校へ依頼</th><th>低頻度で依頼</th><th>使用できない</th><th>その他</th></tr></thead>
+        <tbody>
+          <tr><th>全体</th><td class="pct">2%</td><td class="pct"><b>50%</b></td><td class="pct">25%</td><td class="pct">15%</td><td class="pct">8%</td></tr>
+          <tr><th>川崎区</th><td class="pct">0%</td><td class="pct">42%</td><td class="pct">36%</td><td class="pct">14%</td><td class="pct">8%</td></tr>
+          <tr><th>幸区</th><td class="pct">6%</td><td class="pct">53%</td><td class="pct">17%</td><td class="pct">18%</td><td class="pct">6%</td></tr>
+          <tr><th>中原区</th><td class="pct">0%</td><td class="pct">43%</td><td class="pct">19%</td><td class="pct">24%</td><td class="pct">14%</td></tr>
+          <tr><th>高津区</th><td class="pct">0%</td><td class="pct">35%</td><td class="pct">24%</td><td class="pct">29%</td><td class="pct">12%</td></tr>
+          <tr><th>宮前区</th><td class="pct">6%</td><td class="pct">47%</td><td class="pct">29%</td><td class="pct">12%</td><td class="pct">6%</td></tr>
+          <tr><th>多摩区</th><td class="pct">0%</td><td class="pct">59%</td><td class="pct">17%</td><td class="pct">12%</td><td class="pct">12%</td></tr>
+          <tr><th>麻生区</th><td class="pct">5%</td><td class="pct"><b>76%</b></td><td class="pct">19%</td><td class="pct">0%</td><td class="pct">0%</td></tr>
+        </tbody>
+      </table></div>
+      <div class="source-note"><b>解釈：</b>全区で「PTAが自由に使用」は0〜6%と低水準です。麻生区は「学校に依頼」が76%と突出し、依頼を前提とした利用が定着。一方、高津区は「使用できない」が29%で最も高く、同じ市内でも学校との運用合意に差があることがうかがえます。</div>
+
+      <h3 class="subhead">設問②：ミマモルメ以外のPTA独自ツールを使用しているか</h3>
+      <div class="table-wrap"><table class="compact">
+        <thead><tr><th>区</th><th>使用</th><th>未使用</th><th>読み取り</th></tr></thead>
+        <tbody>
+          <tr><th>全体</th><td class="pct">24%</td><td class="pct">76%</td><td>独自運用は約4分の1</td></tr>
+          <tr><th>川崎区</th><td class="pct">3%</td><td class="pct">97%</td><td>独自ツール利用が最少</td></tr>
+          <tr><th>幸区</th><td class="pct">29%</td><td class="pct">71%</td><td>全体をやや上回る</td></tr>
+          <tr><th>中原区</th><td class="pct">38%</td><td class="pct">62%</td><td>独自化が比較的進行</td></tr>
+          <tr><th>高津区</th><td class="pct"><b>65%</b></td><td class="pct">35%</td><td>独自ツール利用が最も高い</td></tr>
+          <tr><th>宮前区</th><td class="pct">29%</td><td class="pct">71%</td><td>全体をやや上回る</td></tr>
+          <tr><th>多摩区</th><td class="pct">18%</td><td class="pct">82%</td><td>全体を下回る</td></tr>
+          <tr><th>麻生区</th><td class="pct">10%</td><td class="pct">90%</td><td>学校依頼型との整合が見える</td></tr>
+        </tbody>
+      </table></div>
+      <div class="source-note"><b>解釈：</b>設問①でミマモルメを「使用できない」が高かった高津区では、独自ツール利用が65%と最も高い一方、学校依頼型が強い麻生区では10%。因果関係は証明できませんが、既存基盤の使いにくさが独自導入を促す可能性を示す組み合わせです。</div>
+
+      <h3 class="subhead">設問③：今後の導入意向</h3>
+      <div class="table-wrap"><table class="compact">
+        <thead><tr><th>区</th><th>導入済み</th><th>近く導入</th><th>会員同意×</th><th>学校同意×</th><th>予定なし</th><th>その他・検討中</th></tr></thead>
+        <tbody>
+          <tr><th>全体</th><td class="pct">19%</td><td class="pct">6%</td><td class="pct">1%</td><td class="pct">1%</td><td class="pct">39%</td><td class="pct">34%</td></tr>
+          <tr><th>川崎区</th><td class="pct">0%</td><td class="pct">0%</td><td class="pct">3%</td><td class="pct">3%</td><td class="pct">53%</td><td class="pct">41%</td></tr>
+          <tr><th>幸区</th><td class="pct">17%</td><td class="pct">12%</td><td class="pct">0%</td><td class="pct">0%</td><td class="pct">18%</td><td class="pct">53%</td></tr>
+          <tr><th>中原区</th><td class="pct">34%</td><td class="pct">0%</td><td class="pct">0%</td><td class="pct">0%</td><td class="pct">33%</td><td class="pct">33%</td></tr>
+          <tr><th>高津区</th><td class="pct"><b>56%</b></td><td class="pct">12%</td><td class="pct">0%</td><td class="pct">0%</td><td class="pct">19%</td><td class="pct">13%</td></tr>
+          <tr><th>宮前区</th><td class="pct">33%</td><td class="pct">20%</td><td class="pct">0%</td><td class="pct">0%</td><td class="pct">27%</td><td class="pct">20%</td></tr>
+          <tr><th>多摩区</th><td class="pct">12%</td><td class="pct">6%</td><td class="pct">0%</td><td class="pct">6%</td><td class="pct">35%</td><td class="pct">41%</td></tr>
+          <tr><th>麻生区</th><td class="pct">5%</td><td class="pct">5%</td><td class="pct">0%</td><td class="pct">0%</td><td class="pct"><b>66%</b></td><td class="pct">24%</td></tr>
+        </tbody>
+      </table></div>
+      <div class="source-note">「その他」には検討中、状況不明、設問の選択肢に収まりにくい回答が含まれます。したがって「予定なし」だけで関心がないとは断定できません。</div>
+    </section>
+
+    <section id="actual">
+      <div class="section-head"><div class="num">4</div><div><h2>実際に使われていたツール・費用・評価</h2><p>設問②-1〜②-4を再整理。費用は回答者記載であり、公式価格ではない</p></div></div>
+      <div class="stats">
+        <div class="panel"><h3>利用校数として挙がった回答</h3><ol class="rank"><li><span>がくぷり</span><span class="count">11</span></li><li><span>マチコミ（切替中1校を含む）</span><span class="count">7</span></li><li><span>スクリレ</span><span class="count">6</span></li><li><span>LINE</span><span class="count">3</span></li><li><span>れんらくがかりスクール</span><span class="count">2</span></li><li><span>HP、LINEオープンチャット、PTAアプリ、横浜ネットワーク、緊急連絡、公式LINE等</span><span class="count">各1</span></li></ol></div>
+        <div class="panel"><h3>回答に現れた費用例</h3><p class="caption">同一ツールでも契約・認識に差</p><ul style="padding-left:20px;font-size:13px"><li><b>がくぷり：</b>月11,000円／年132,000円、年約250,000円等</li><li><b>マチコミ：</b>無料、年約10,000円等</li><li><b>スクリレ：</b>無料、年59,400〜59,840円等</li><li><b>LINE：</b>無料、月5,000円等</li><li><b>れんらくがかり：</b>月8,250円</li><li><b>横浜ネットワーク：</b>年約66,000〜70,000円</li></ul><div class="source-note">契約人数、機能、広告、学校契約との関係が不明なため、横並び比較には使わず、見積確認が必要な幅として扱います。</div></div>
+      </div>
+
+      <h3 class="subhead">利用者が挙げた良い点・不満点</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>ツール</th><th>良い点</th><th>不満・運用課題</th><th>分析上の意味</th></tr></thead>
+        <tbody>
+          <tr><th>がくぷり</th><td>印刷・配布・用紙費削減、PTAが配信先を自由選択、予約配信、アンケート、履歴再利用、役員・委員・会員名簿、会議室予約、アプリ内閲覧、個人情報漏えいリスク低減</td><td>年度初めの作業、アンケート画面、閲覧権限設計、既読・未回答把握、未登録者対応、保護者見逃し、PC操作できる役員への偏り、料金</td><td>多機能な分、初期設計と運用人材が成否を左右</td></tr>
+          <tr><th>マチコミ</th><td>PTAが自由に使用、タイムリー配信、既読通知、無料で始めやすい、印刷不要、来校不要、細かな対象配信</td><td>添付容量・件数、全員がメールを開かない、PC入力しづらい、別アプリ登録、無料版の広告、全員登録の難しさ</td><td>導入障壁は低いが、登録率・開封率がボトルネック</td></tr>
+          <tr><th>スクリレ</th><td>紛失防止、子どもが持ち帰らなくても確認、どこでも閲覧、カラー、過去のお便り、印刷配布・用紙削減、学年・個人単位配信</td><td>導入案内に手間、気づかれない、削除機能不足、重要度が低く見える、毎年再登録・登録用紙発行</td><td>紙削減効果は大きいが、通知設計と年度更新が課題</td></tr>
+          <tr><th>LINE系</th><td>画像添付、親しみやすい、家庭向け活動報告、無料、自由発信、公式LINEは一方通行配信可能</td><td>登録制で全員に届かない、年間配信数制限、一般会員への周知・登録が進まない</td><td>補助チャネルには強いが、全会員の正式連絡網には登録管理が必要</td></tr>
+          <tr><th>その他</th><td>れんらくがかりは保護者へ直接到達、横浜ネットワークは学校連絡との共用で読まれやすい、個別配信可能な仕組みもある</td><td>年度更新、ダウンロードしないと読まれない、添付不可、学校経由の手間、有料、独自運用では登録者が増えにくい</td><td>既存学校基盤との統合は到達率を高める一方、PTAの裁量を制限</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout"><strong>費用対効果の見方</strong><p>月額・年額だけでなく、①印刷費、②配布・来校時間、③年度更新、④未登録者対応、⑤問い合わせ、⑥紙との二重運用、⑦引継ぎ・データ移行を含めた「総保有コスト」で比較する必要があります。</p></div>
+    </section>
+
+    <section id="needs">
+      <div class="section-head"><div class="num">5</div><div><h2>現場ニーズを6群に整理</h2><p>設問⑤・⑥・自由記述から、選定要件に翻訳</p></div></div>
+      <div class="themes">
+        <article class="theme"><div class="icon">⚡</div><h3>PTAの自立運用</h3><p>学校を介さない配信、予約配信、開封確認、グループ配信、個別連絡。担当者交代後も運用できること。</p></article>
+        <article class="theme"><div class="icon">◎</div><h3>わかりやすさ</h3><p>送信側・受信側とも簡単。アプリ追加不要、スマートフォン以外も対応、登録や管理が容易。</p></article>
+        <article class="theme"><div class="icon">▦</div><h3>PTA業務の統合</h3><p>アンケート、名簿、出欠、シフト、役員割当、履歴・書庫、進級時の自動更新、兄弟姉妹紐付け。</p></article>
+        <article class="theme"><div class="icon">↔</div><h3>双方向性</h3><p>質問回答、返信集計、個別相談、非会員への配信区分。単なる一斉配信を越えた行動回収。</p></article>
+        <article class="theme"><div class="icon">🔒</div><h3>安心とガバナンス</h3><p>個人情報保護、セキュリティ、広告なし、権限管理、過去役員のアクセス停止、データ移行。</p></article>
+        <article class="theme"><div class="icon">¥</div><h3>持続可能な費用</h3><p>導入費・月額費だけでなく、決済手数料、作業時間、紙・印刷・配布コストを含む総コスト。</p></article>
+      </div>
+      <h3 class="subhead">必要機能を「目的」で分類する</h3>
+      <div class="table-wrap"><table class="compact">
+        <thead><tr><th>目的</th><th>原資料で挙がった機能</th><th>導入時の確認質問</th></tr></thead>
+        <tbody>
+          <tr><th>確実に届ける</th><td>開封確認、予約配信、リマインド、グループ・個別配信、非会員区分、PDF・画像・リンク</td><td>未開封者だけに再通知できるか。重要連絡を他のお便りと区別できるか。</td></tr>
+          <tr><th>回答を回収する</th><td>アンケート、投票、自動集計、イベント出欠、質疑応答、返信自動集計</td><td>未回答者を把握できるか。回答データをCSV等で持ち出せるか。</td></tr>
+          <tr><th>会員を管理する</th><td>簡単登録、名簿、進級自動更新、兄弟姉妹紐付け、役員・委員候補、役割割当</td><td>卒業・退会時に自動削除できるか。非会員情報と分離できるか。</td></tr>
+          <tr><th>活動を運営する</th><td>シフト、スケジュール、掲示板、過去アーカイブ、履歴、会議室予約、決済</td><td>年度を越えて必要な履歴を引き継げるか。決済手数料は3%以内か。</td></tr>
+          <tr><th>誰も取り残さない</th><td>スマホ以外、PC、シンプル操作、多言語、アプリ追加不要、紙併用</td><td>未登録・端末なし・Wi-Fiなし世帯の代替ルートをどうするか。</td></tr>
+          <tr><th>安全に引き継ぐ</th><td>権限管理、個人情報保護、セキュリティ、機種変更対応、管理の簡易性</td><td>役員交代時に個人アカウントを使わず権限移管できるか。監査ログは残るか。</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3 class="subhead">要件の優先順位</h3>
+      <div class="insights">
+        <div class="insight"><b>必須（導入可否を決める）</b><p>PTAの直接配信権限、対象者管理、開封・未回答把握、個人情報保護、年度更新・引継ぎ、スマホ非利用者への代替手段。</p></div>
+        <div class="insight"><b>重要（効果を大きくする）</b><p>予約・リマインド、アンケート自動集計、PDF・画像、過去履歴、兄弟姉妹・進級管理、非会員区分、グループ・個別連絡。</p></div>
+        <div class="insight"><b>発展（運営基盤化する）</b><p>決済、役員割当、シフト、会議室、掲示板、地域・中学校区連携。便利だが、導入初期に詰め込みすぎると定着を妨げます。</p></div>
+        <div class="insight"><b>非機能要件（見落としやすい）</b><p>広告有無、ファイル容量、データ出力、障害時対応、サポート、多言語、契約終了時の移行、サービス継続性。</p></div>
+      </div>
+    </section>
+
+    <section id="voices">
+      <div class="section-head"><div class="num">6</div><div><h2>33件の自由記述から見える本音</h2><p>個別意見をそのまま一般化せず、繰り返し現れる論点をテーマ別に整理</p></div></div>
+      <div class="quote-grid">
+        <article class="quote"><h3>紙かデジタルか、ではなく「選べる設計」</h3><p>アプリでの閲覧を歓迎しつつ、紙の即時性やデジタルが苦手な家庭への配慮から、紙を希望制で残す案が示されています。</p><span class="evidence">根拠となる声：紙を残したい／配信だけでは全員に伝わらず結局紙配布する／紙希望世帯以外はアプリ配信に。</span></article>
+        <article class="quote"><h3>ツール追加への疲労</h3><p>学校ホームページ、ミマモルメ、PTA独自アプリなど複数チャネルを保護者が使い分けることへの懸念があります。</p><span class="evidence">根拠となる声：ツールをいたずらに増やしたくない／学校側とPTA側の2ツールはユーザーフレンドリーでない。</span></article>
+        <article class="quote"><h3>学校との協議が最大の非技術的課題</h3><p>重要配信が埋もれる、PTA専用配信は不可とされる、依頼への返答が遅いなど、製品より運用合意が導入を左右しています。</p><span class="evidence">根拠となる声：学校の案内確認だけでも大変／PTA配信増で重要情報が埋もれる／PTAオンリーのお知らせ不可。</span></article>
+        <article class="quote"><h3>導入ノウハウの共有不足</h3><p>何を選ぶかだけでなく、導入までの期間、手順、学校との交渉、未登録者対応など、成功プロセスを知りたいという需要があります。</p><span class="evidence">根拠となる声：導入校に手順を聞きたい／同じ状況で導入してどうだったか知りたい／市Pで事例共有を。</span></article>
+        <article class="quote"><h3>市・区単位の標準化への期待</h3><p>学校規模や役員のIT習熟による格差を避けるため、共同調達や共通ツール、共通方針を求める意見があります。</p><span class="evidence">根拠となる声：川崎市全体で同一サービス／中学校区でパッケージ契約／スマホ非保有者対応を市全体で決める。</span></article>
+        <article class="quote"><h3>「任期中に成果を出す」時間制約</h3><p>役員任期が短く、比較検討や学校協議に時間をかけると導入まで到達できないため、すぐ使える選択肢が優先される現実があります。</p><span class="evidence">根拠となる声：話し合う時間がなく導入ハードルの低さを優先／自分の任期中に使えないと意味がない。</span></article>
+        <article class="quote"><h3>個人情報への説明責任</h3><p>メールアドレス等の収集目的、主催者、管理主体を明示し、PTAが扱う情報増加に備える必要性が指摘されています。</p><span class="evidence">根拠となる声：アンケート主催の記載がない／メール必須なら個人情報取扱いを明示／市Pから見本となる取組を。</span></article>
+        <article class="quote"><h3>到達率を高める既存基盤の価値</h3><p>既に多くの家庭が使う学校ツールをPTAも使えれば、登録ハードルと見逃しを減らせるという期待が根強くあります。</p><span class="evidence">根拠となる声：ミマモルメ登録をそのままPTA版にも／学校連絡と同じ基盤ならほとんどの保護者が読む。</span></article>
+      </div>
+
+      <h3 class="subhead">自由記述から得られる示唆</h3>
+      <details open><summary>示唆1｜「100%ペーパーレス」を最初のKPIにしない</summary><div><ul><li>初年度は重要度・対象に応じたハイブリッド運用を認める。</li><li>紙の削減率だけでなく、到達率、回答率、作業時間、問い合わせ件数を測る。</li><li>未登録世帯を放置せず、代替手段を明文化する。</li></ul></div></details>
+      <details><summary>示唆2｜ツール導入と同時に「運用協定」を作る</summary><div><ul><li>学校とPTAの配信範囲、承認の要否、緊急時の扱い、重要度表示を合意する。</li><li>誰が名簿を更新し、誰が退会・卒業処理をするかを決める。</li><li>配信内容の責任主体と問い合わせ先を明記する。</li></ul></div></details>
+      <details><summary>示唆3｜成功事例は製品名より導入プロセスを共有する</summary><div><ul><li>検討開始から本稼働までの期間と会議回数。</li><li>学校・会員の合意形成、費用承認、個人情報説明の文面。</li><li>登録率、開封率、紙削減、役員工数の導入前後比較。</li></ul></div></details>
+    </section>
+
+    <section id="decision">
+      <div class="section-head"><div class="num">7</div><div><h2>導入判断の進め方</h2><p>製品名から選ばず、運用課題から逆算する</p></div></div>
+      <div class="decision"><h3 style="margin:0">推奨する4ステップ</h3><div class="steps">
+        <div class="step"><b>1｜目的を一文に</b><span>例：「学校を介さず、PTAが会員へ確実に連絡し回答を回収する」</span></div>
+        <div class="step"><b>2｜権限を設計</b><span>学校・PTA・委員会・保護者の管理範囲と、年度交代時の権限移管を決める</span></div>
+        <div class="step"><b>3｜必須要件で試す</b><span>実際のお便り、アンケート、欠席者、兄弟世帯、非会員区分で小規模テスト</span></div>
+        <div class="step"><b>4｜総コスト比較</b><span>利用料＋作業時間＋印刷配布＋問い合わせ対応＋移行・引継ぎコストで評価</span></div>
+      </div><div class="callout"><strong>この資料から導ける選び分け</strong><p>低コストで学校と協調して紙削減ならスクリレ、PTA業務全体を統合するならがくぷり、登下校見守りを中心に既存基盤を使うならミマモルメ、まず無料でPTA独自の連絡網を作るならマチコミ、という仮説から実証テストへ進むのが合理的です。これは原資料時点の仮説であり、現行仕様の確認が前提です。</p></div></div>
+      <h3 class="subhead">主体別に担うべきこと</h3>
+      <div class="actor-grid">
+        <article class="actor"><h3>市P・区P</h3><ol><li>標準評価表と導入事例を共有</li><li>共同調達・ボリュームディスカウントを検討</li><li>個人情報・非デジタル世帯対応のひな型を作る</li><li>学校・教育委員会との共通運用原則を協議</li></ol></article>
+        <article class="actor"><h3>単位PTA</h3><ol><li>現在の配信業務と工数を可視化</li><li>必須要件を5項目以内に絞る</li><li>小規模テストで登録・到達・回答率を測定</li><li>総会・運営委員会等の承認ルートを確認</li></ol></article>
+        <article class="actor"><h3>学校</h3><ol><li>学校配信とPTA配信の境界を明確化</li><li>緊急・重要情報の優先順位を設計</li><li>名簿・個人情報の提供可否を整理</li><li>教職員負担が増えない依頼・承認手順を合意</li></ol></article>
+      </div>
+      <h3 class="subhead">90日で行う小規模導入モデル</h3>
+      <div class="table-wrap"><table class="compact">
+        <thead><tr><th>期間</th><th>実施事項</th><th>確認指標</th></tr></thead>
+        <tbody>
+          <tr><th>0〜30日</th><td>現状業務棚卸し、学校協議、必須要件、個人情報・非会員・未登録者方針、候補2〜3製品のデモ</td><td>年間配信数、印刷費、作業時間、現行到達率の基準値</td></tr>
+          <tr><th>31〜60日</th><td>役員・委員など限定グループでテスト。PDF配信、アンケート、リマインド、機種変更、権限交代を実演</td><td>登録完了率、開封率、回答率、問い合わせ数、操作時間</td></tr>
+          <tr><th>61〜90日</th><td>対象を拡大し紙との併用条件を検証。課題を修正し、本導入・見送り・再テストを判断</td><td>紙削減率、未到達者数、役員・学校工数、利用者満足、年間総コスト</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="limits">
+      <div class="section-head"><div class="num">8</div><div><h2>資料の限界と、更新時に確認すべきこと</h2><p>原資料を意思決定に使う際の重要な留保</p></div></div>
+      <div class="limits">
+        <div class="limit"><h3>調査設計上の限界</h3><ul><li>146は学校数ではなく回答数で、同一校の複数回答を含む</li><li>区ごとの回答母数が示されておらず、区間比較は慎重に扱う必要がある</li><li>一部の回答でツール名・料金・プランが混在し、回答者認識に基づく</li><li>自由記述は有用だが、頻度集計や優先順位づけは行われていない</li></ul></div>
+        <div class="limit"><h3>2026年時点で再確認する項目</h3><ul><li>現行料金、無料範囲、最低契約期間、人数課金、広告表示</li><li>PTAの直接配信権限と、学校承認が必要な操作</li><li>個人情報の保管場所、委託先、退会・卒業時削除、データ出力</li><li>年度更新、管理者交代、アカウント紛失、サービス終了時の移行</li><li>アクセシビリティ、多言語、ガラケー・PC対応、通知の到達性</li></ul></div>
+      </div>
+      <div class="callout"><strong>重要</strong><p>料金・機能は原資料作成時点（2024年1月）の記載であり、現行情報として保証されません。実際の選定前には各社公式情報と見積書、利用規約・プライバシーポリシーで再確認してください。</p></div>
+    </section>
+
+    <section id="appendix">
+      <div class="section-head"><div class="num">9</div><div><h2>原資料の構成と本レポートの扱い</h2><p>どこまでが原資料の事実で、どこからが再整理・分析か</p></div></div>
+      <div class="limits">
+        <div class="limit"><h3>原資料に含まれる内容</h3><ul><li>4サービスの運営会社、特徴、主な機能、料金、PTA利用方法</li><li>ミマモルメのPTA利用状況と7区別構成比</li><li>独自配信ツールの利用有無、名称、回答料金、良い点・不満点</li><li>今後の導入意向、検討ツール、重視点、必要機能</li><li>その他意見・事例の自由記述33件</li></ul></div>
+        <div class="limit"><h3>本レポートで加えた分析</h3><ul><li>「学校依存」と「PTA自立運用」の区別</li><li>区別回答を横断した運用環境の解釈</li><li>現場ニーズの6群分類と要件優先順位</li><li>自由記述の8テーマへの統合</li><li>主体別アクション、90日導入モデル、総保有コストの視点</li></ul></div>
+      </div>
+      <div class="source-note"><b>中立性：</b>原資料および本レポートは特定サービスを推奨・保証するものではありません。サービス名の表記、料金、仕様は原資料に基づき、2026年現在の公式情報との照合は行っていません。</div>
+    </section>
+  </main>
+  <footer><p>本HTMLは、川崎市PTA連絡協議会 広報・研修グループ「配信ツールを活用したPTA活動〜快適性、利便性、負荷軽減、経費削減を探求する〜」（令和6年1月9日）をもとに、内容を再構成・分析したものです。原資料記載のとおり、協議会と各運営会社との関係を示すものではありません。</p></footer>
+</body>
+</html>
